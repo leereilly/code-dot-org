@@ -9,9 +9,16 @@ class Api::V1::Pd::ApplicationsController < ::ApplicationController
     application_data = empty_application_data
 
     ROLES.each do |role|
-      get_applications_by_role(role).group(:status).count.each do |status, count|
-        application_data[role][status] = count
-      end
+      get_applications_by_role(role).
+        select(:status, "COUNT(locked_at) as total_locked", "COUNT(id) as total").
+        group(:status).
+        each do |group|
+          application_data[role][group.status] = {
+            total: group.total,
+            total_locked: group.total_locked,
+            total_unlocked: group.total - group.total_locked
+          }
+        end
     end
 
     render json: application_data
@@ -91,7 +98,11 @@ class Api::V1::Pd::ApplicationsController < ::ApplicationController
       TYPES_BY_ROLE.each do |role, app_type|
         app_data[role] = {}
         app_type.statuses.keys.each do |status|
-          app_data[role][status] = 0
+          app_data[role][status] = {
+            total: 0,
+            total_locked: 0,
+            total_unlocked: 0
+          }
         end
       end
     end
