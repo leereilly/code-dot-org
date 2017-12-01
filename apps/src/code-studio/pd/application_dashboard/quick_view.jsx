@@ -7,6 +7,7 @@
  *        /csp_facilitators
  */
 import React, {PropTypes} from 'react';
+import { connect } from 'react-redux';
 import Select from "react-select";
 import "react-select/dist/react-select.css";
 import QuickViewTable from './quick_view_table';
@@ -43,10 +44,10 @@ const styles = {
   }
 };
 
-export default class QuickView extends React.Component {
+class QuickView extends React.Component {
   static propTypes = {
+    regionalPartnerName: PropTypes.string.isRequired,
     route: PropTypes.shape({
-      regionalPartnerName: PropTypes.string.isRequired,
       path: PropTypes.string.isRequired,
       applicationType: PropTypes.string.isRequired,
       viewType: PropTypes.oneOf(['teacher', 'facilitator']).isRequired
@@ -102,7 +103,7 @@ export default class QuickView extends React.Component {
     return (
       <div>
         <Row>
-          <h1>{this.props.route.regionalPartnerName}</h1>
+          <h1>{this.props.regionalPartnerName}</h1>
           <h2>{this.props.route.applicationType}</h2>
           <Col md={6} sm={6}>
             <Button
@@ -135,3 +136,7 @@ export default class QuickView extends React.Component {
     );
   }
 }
+
+export default connect(state => ({
+  regionalPartnerName: state.regionalPartnerName,
+}))(QuickView);
