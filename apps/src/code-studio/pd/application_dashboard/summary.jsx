@@ -8,7 +8,7 @@ import SummaryTable from './summary_table';
 import Spinner from '../components/spinner';
 import $ from 'jquery';
 
-class Summary extends React.Component {
+export class Summary extends React.Component {
   static propTypes = {
     regionalPartnerName: PropTypes.string.isRequired,
   }
