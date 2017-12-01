@@ -25,7 +25,7 @@ const styles = {
   }
 };
 
-class QuickViewTable extends React.Component {
+export class QuickViewTable extends React.Component {
   static propTypes = {
     showLocked: PropTypes.bool,
     path: PropTypes.string.isRequired,
