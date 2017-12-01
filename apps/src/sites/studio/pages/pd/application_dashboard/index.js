@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   ReactDOM.render(
     <ApplicationDashboard
       regionalPartnerName={getScriptData("props")['regionalPartnerName']}
+      canLockApplications={getScriptData("props")['canLockApplications']}
     />,
     document.getElementById('application-container')
   );

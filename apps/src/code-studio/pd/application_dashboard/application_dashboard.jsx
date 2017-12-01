@@ -4,7 +4,10 @@
 import React, {PropTypes} from 'react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import applicationDashboardReducers, { setRegionalPartnerName } from './reducers';
+import applicationDashboardReducers, {
+  setRegionalPartnerName,
+  setLockApplicationPermission,
+} from './reducers';
 import Header from '../components/header';
 import {
   Router,
@@ -42,11 +45,15 @@ const paths = {
 export default class ApplicationDashboard extends React.Component {
   static propTypes = {
     regionalPartnerName: PropTypes.string,
+    canLockApplications: PropTypes.bool,
   };
 
   componentWillMount() {
     if (this.props.regionalPartnerName) {
       store.dispatch(setRegionalPartnerName(this.props.regionalPartnerName));
+    }
+    if (this.props.canLockApplications) {
+      store.dispatch(setLockApplicationPermission(true));
     }
   }
 

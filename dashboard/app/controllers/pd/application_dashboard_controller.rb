@@ -7,7 +7,8 @@ module Pd
 
       @script_data = {
         props: {
-          regionalPartnerName: current_user.regional_partners.first.try(:name)
+          regionalPartnerName: current_user.regional_partners.first.try(:name),
+          canLockApplications: can?(:manage, Pd::Application::ApplicationBase)
         }.to_json
       }
     end
