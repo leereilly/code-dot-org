@@ -45,10 +45,6 @@ export default class DetailViewContents extends React.Component {
     viewType: PropTypes.oneOf(['teacher', 'facilitator']).isRequired
   };
 
-  componentWillMount() {
-    this.statuses = ApplicationStatuses[this.props.viewType];
-  }
-
   state = {
     status: this.props.applicationData.status,
     locked: this.props.applicationData.locked,
@@ -56,6 +52,10 @@ export default class DetailViewContents extends React.Component {
     response_scores: this.props.applicationData.response_scores || {},
     editing: false
   };
+
+  componentWillMount() {
+    this.statuses = ApplicationStatuses[this.props.viewType];
+  }
 
   handleCancelEditClick = () => {
     this.setState({
