@@ -60,3 +60,12 @@ exports.ApplicationStatuses = {
     'Withdrawn'
   ]
 };
+
+/**
+ * Statuses that represent "finalized" applications
+ */
+exports.ApplicationFinalStatuses = [
+  'accepted',
+  'declined',
+  'waitlisted',
+];
