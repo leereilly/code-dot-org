@@ -3,15 +3,14 @@
  * Route: /summary
  */
 import React, {PropTypes} from 'react';
+import { connect } from 'react-redux';
 import SummaryTable from './summary_table';
 import Spinner from '../components/spinner';
 import $ from 'jquery';
 
-export default class Summary extends React.Component {
+class Summary extends React.Component {
   static propTypes = {
-    route: PropTypes.shape({
-      regionalPartnerName: PropTypes.string.isRequired
-    })
+    regionalPartnerName: PropTypes.string.isRequired,
   }
 
   static contextTypes = {
@@ -39,11 +38,11 @@ export default class Summary extends React.Component {
 
   render() {
     if (this.state.loading) {
-      return <Spinner/>;
+      return <Spinner />;
     }
     return (
       <div>
-        <h1>{this.props.route.regionalPartnerName}</h1>
+        <h1>{this.props.regionalPartnerName}</h1>
         <div className="row">
           <SummaryTable caption="CS Fundamentals Facilitators" data={this.state.applications["csf_facilitators"]} path="csf_facilitators"/>
           <SummaryTable caption="CS Discoveries Facilitators" data={this.state.applications["csd_facilitators"]} path="csd_facilitators"/>
@@ -53,3 +52,7 @@ export default class Summary extends React.Component {
     );
   }
 }
+
+export default connect(state => ({
+  regionalPartnerName: state.regionalPartnerName,
+}))(Summary);
