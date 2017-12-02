@@ -23,6 +23,16 @@ export default () => {
     }
   }
 
+  if ($('.feature_project').length) {
+    if (dashboard.project.isProjectLevel()) {
+      //TODO: have some way to check if the project is highlighted or not, then
+      // conditionally set the button text and click function.
+      $('.feature_project').html($('<button id="feature" class="btn btn-default btn-sm">Highlight in gallery</button>'));
+    } else {
+      $('.feature_project').html($('<button id="feature" class="btn btn-default btn-sm">Stop highlighting in gallery</button>'));
+    }
+  }
+
   if ($('.admin-abuse').length && dashboard.project.isProjectLevel()) {
     var abuseScore = dashboard.project.getAbuseScore();
     if (abuseScore) {

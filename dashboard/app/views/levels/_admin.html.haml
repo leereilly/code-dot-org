@@ -73,6 +73,8 @@
             = link_to build_script_level_path(script_level), build_script_level_path(script_level)
       %br/
       .project_admin
+      %br/
+      .feature_project
     - if current_user.permission?(UserPermission::RESET_ABUSE)
       %br
       %div.admin-abuse{ :style => "display: none" }
